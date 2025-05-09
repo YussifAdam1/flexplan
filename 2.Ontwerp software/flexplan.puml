@@ -1,0 +1,50 @@
+@startuml
+abstract class Gebruiker {
+    +id: int
+    +naam: string
+    +email: string
+    +wachtwoord: string
+    +login(): void
+}
+
+class Werknemer {
+    +contracturen: int
+    +verlofAanvragen(): void
+}
+
+class Werkgever {
+    +bedrijf: string
+    +verlofGoedkeuren(): void
+}
+
+class Rooster {
+    +id: int
+    +datum: Date
+    +werknemers: Werknemer[]
+    +maakRooster(): void
+}
+
+class Verlofaanvraag {
+    +id: int
+    +werknemer: Werknemer
+    +startDatum: Date
+    +eindDatum: Date
+    +status: string
+    +aanvraagIndienen(): void
+    +aanvraagBeoordelen(): void
+}
+
+interface BeheerFuncties {
+    +systeemOnderhoud(): void
+}
+
+class Beheerder implements BeheerFuncties {
+    +systeemOnderhoud(): void
+}
+
+Gebruiker <|-- Werknemer
+Gebruiker <|-- Werkgever
+Werknemer "1" -- "n" Rooster
+Werknemer "1" -- "n" Verlofaanvraag
+Beheerder ..|> BeheerFuncties
+@enduml
